@@ -12,13 +12,16 @@
 
   //this is the function constructor that builds an object and gives it 3 properties. It sets its value if you pass something into the function constructor, otherwise it sets some defaults
   //this needs to point to Greetr.prototype as its prototype. As is, it points to Greetr.init.prototype, but we want it to point to Greetr.prototype
-  Greeter.init = function(firstName, lastName, language){
+  Greetr.init = function(firstName, lastName, language){
     var self = this;
-    self.firstName = firstName || ''
-    self.lastName = lastName || ''
-    self.language = language || ''
+    self.firstName = firstName || '';
+    self.lastName = lastName || '';
+    self.language = language || 'en';
   }
 
   Greetr.init.prototype = Greetr.prototype
 
-}(window, $))
+  //exposing the Greetr function and setting an alias for Greetr as G$
+  global.Greetr = global.G$ = Greetr
+
+}(window, jQuery))
