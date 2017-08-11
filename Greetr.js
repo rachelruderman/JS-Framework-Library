@@ -20,9 +20,57 @@
     es: 'Saludos'
   }
 
-  //this is where we'll put any methods that we want to use
-  Greetr.prototype = {}
+  var logMessages = {
+    en: 'Logged in',
+    es: 'Inició sesión'
+  }
 
+  //this is where we'll put any methods that we want to use
+  Greetr.prototype = {
+    fullName: function(){
+      return `this.firstName + ' ' + this.lastName`
+    },
+    //supportedLangs is hidden, but we still have access to it because of where it sits lexically
+    validate: function(){
+      if (supportedLangs.indexOf(this.language) === -1){
+        throw 'Invalid language'
+      }
+    },
+    greeting: function(){
+      return greetings[this.language] + '' + this.firstName + '!'
+    },
+    formalGreeting: function(){
+      return formalGreetings[this.language] + ', ' + this.fullName()
+    },
+    greet: function(formal){
+      var msg;
+
+      //if undefined or null it will be coerced to 'false'
+      if(formal){
+        msg = this.formalGreeting()
+      } else {
+        msg = this.greeting()
+      }
+      if(console){
+        console.log(msg)
+      }
+      //'this' refers to the calling object at execution time. Makes the method chainable
+      return this
+    },
+    log: function(){
+      if(console){
+        console.log(logMessages[this.language] + ': ' + this.fullName())
+      }
+      return this
+    },
+    setLang: function(lang){
+      // we'll update the lang, then call validate to make sure it's valid
+      this.language = lang;
+      this.validate()
+
+      return this
+    }
+  }
 
   //this is the function constructor that builds an object and gives it 3 properties. It sets its value if you pass something into the function constructor, otherwise it sets some defaults
   //this needs to point to Greetr.prototype as its prototype. As is, it points to Greetr.init.prototype, but we want it to point to Greetr.prototype
