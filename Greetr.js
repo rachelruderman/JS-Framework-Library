@@ -69,6 +69,24 @@
       this.validate()
 
       return this
+    },
+    //jQuery method that takes a selector, sets the greeting itself and updates whatever HTML is there, and we're making it chainable. Lecture 77
+    HTMLGreeting: function(selector, formal){
+      if(!$){
+        throw 'jQuery not loaded'
+      }
+      if(!selector){
+        throw 'Missing jQuery selector'
+      }
+      var msg;
+      if(formal){
+        msg = this.formalGreeting()
+      } else {
+        msg = this.greeting()
+      }
+      $(selector).html(msg)
+
+      return this
     }
   }
 
