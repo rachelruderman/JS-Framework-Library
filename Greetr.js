@@ -92,16 +92,20 @@
 
   //this is the function constructor that builds an object and gives it 3 properties. It sets its value if you pass something into the function constructor, otherwise it sets some defaults
   //this needs to point to Greetr.prototype as its prototype. As is, it points to Greetr.init.prototype, but we want it to point to Greetr.prototype
+  //the actual object ic reated here, allowing us to 'new' an object without calling 'new'
   Greetr.init = function(firstName, lastName, language){
     var self = this;
     self.firstName = firstName || '';
     self.lastName = lastName || '';
     self.language = language || 'en';
+
+    self.validate()
   }
 
+//trick borrowed from jQuery so we don't have to use the 'new' keyword
   Greetr.init.prototype = Greetr.prototype
 
-  //exposing the Greetr function and setting an alias for Greetr as G$
+  //attach our Greetr to teh global object, and provide a shorthand '$G' for our poor fingers
   global.Greetr = global.G$ = Greetr
 
 }(window, jQuery))
