@@ -28,7 +28,7 @@
   //this is where we'll put any methods that we want to use
   Greetr.prototype = {
     fullName: function(){
-      return `this.firstName + ' ' + this.lastName`
+      return this.firstName + ' ' + this.lastName
     },
     //supportedLangs is hidden, but we still have access to it because of where it sits lexically
     validate: function(){
@@ -37,7 +37,7 @@
       }
     },
     greeting: function(){
-      return greetings[this.language] + '' + this.firstName + '!'
+      return greetings[this.language] + ' ' + this.firstName + '!'
     },
     formalGreeting: function(){
       return formalGreetings[this.language] + ', ' + this.fullName()
