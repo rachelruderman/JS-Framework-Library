@@ -7,8 +7,22 @@
     return new Greetr.init(firstName, lastName, language)
   }
 
+  var supportedLangs = ['en', 'es']
+
+//now we have a nice list of greetings, and because they've been closed in through closures and not exposed, other developers can't manipulate their values without going into the source code
+  var greetings = {
+    en: 'Hello',
+    es: 'Hola'
+  }
+
+  var formalGreetings = {
+    en: 'Greetings',
+    es: 'Saludos'
+  }
+
   //this is where we'll put any methods that we want to use
   Greetr.prototype = {}
+
 
   //this is the function constructor that builds an object and gives it 3 properties. It sets its value if you pass something into the function constructor, otherwise it sets some defaults
   //this needs to point to Greetr.prototype as its prototype. As is, it points to Greetr.init.prototype, but we want it to point to Greetr.prototype
